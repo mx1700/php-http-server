@@ -5,11 +5,17 @@ echo "server started\n\n";
 
 while (true) {
     $conn = stream_socket_accept($socket, -1);
+    echo "@@request\n";
     $request = fread($conn, 40960);
     echo $request;
     echo "\n@@EOF\n";
 
-    $html = "<html><h1 style='color: green;'>hello world</h1></html>";
+    $html = "
+<html>
+<body style='display: flex; flex-direction: column; align-items: center; justify-content: center;'>
+    <h1 style='color: green;'>hello world!</h1>
+</body>
+</html>";
 
     $length = strlen($html);
     fwrite($conn, <<<EOF

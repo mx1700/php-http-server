@@ -5,6 +5,7 @@ echo "server started\n\n";
 
 while (true) {
     $conn = stream_socket_accept($socket, -1);
+    echo "@@request\n";
     $request = fread($conn, 40960);
     echo $request;
     echo "\n@@EOF\n";

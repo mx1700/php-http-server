@@ -9,9 +9,10 @@ while (true) {
 
     list($header, $body) = explode("\r\n\r\n", $request);
     $header = explode("\r\n", $header);
-    list($method, $path_info, $version) = explode(" ", $header[0]);
-    if ($path_info == '/') $path_info = '/index.html';
+    list($method, $url, $version) = explode(" ", $header[0]);
+    list($path_info, $query_string) = explode('?', strpos($url, '?') ? $url : $url . '?');
 
+    if ($path_info == '/') $path_info = '/index.html';
     $file_path = __DIR__ . '/public' . $path_info;
 
     if (is_file($file_path)) {
